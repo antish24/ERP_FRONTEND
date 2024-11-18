@@ -122,7 +122,7 @@ const SalaryAssignmentTable = ({structureData, loading, reload}) => {
       title: 'IDNO',
       dataIndex: 'IDNO',
       ...getColumnSearchProps ('IDNO'),
-      width: '100px',
+      width: '140px',
       fixed:'left',
       key: 'IDNO',
       render:r=><Link to={`/employee/detail/${r}`}>{r}</Link>
@@ -178,18 +178,18 @@ const SalaryAssignmentTable = ({structureData, loading, reload}) => {
       dataIndex: 'status',
       key: 'status',
       render:r=><Tag color={r==='Active'?"success":'volcano'}>{r}</Tag>,
-      width: '50px',
+      width: '100px',
     },
     {
       title: 'CreatedAt',
       dataIndex: 'createdAt',
       key: 'createdAt',
       render:r=>FormatDay(r),
-      width: '70px',
+      width: '100px',
     },
     {
       title: 'Action',
-      width: '105px',
+      width: '150px',
       fixed: 'right',
       key: 'operation',
       render: r => (

@@ -106,7 +106,6 @@ const NewEmployee = ({openModalFun, reload}) => {
 
   const onFinish = async () => {
     setLoading (true);
-    console.log (formValues);
     try {
       const res = await axios.post (`${BACKENDURL}/employee/new`,formValues);
       reload ();

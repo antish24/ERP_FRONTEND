@@ -23,7 +23,6 @@ const CheckEmployee = () => {
       setLoading (false);
       openNotification ('Success', res.data.message, 3, 'green');
       setEmployeeData (res.data.employeeStatus);
-      console.log (employeeData);
     } catch (error) {
       openNotification ('error', error.response.data.message, 3, 'red');
       setLoading (false);

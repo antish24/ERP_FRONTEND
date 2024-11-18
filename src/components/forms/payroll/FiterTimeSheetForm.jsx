@@ -40,7 +40,7 @@ const FiterTimeSheetForm = ({reload,loading}) => {
   const siteOptions = siteData
     ? siteData.map (d => ({
         value: d.site,
-        label: d.site,
+        label:d.company+" "+d.city+" "+ d.subCity +" "+d.site,
       }))
     : [];
 
@@ -94,7 +94,7 @@ const FiterTimeSheetForm = ({reload,loading}) => {
       </Form.Item>
       <Form.Item
         name="site"
-        style={{margin: '5px', width: '200px'}}
+        style={{margin: '5px', width: '400px'}}
         rules={[
           {
             required: true,

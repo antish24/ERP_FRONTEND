@@ -25,7 +25,6 @@ const UpdateTimeSheetForm = ({openModalFun,id}) => {
       form.resetFields()
     } catch (error) {
       setLoading (false);
-      console.log(error)
       openNotification ('error', error.response.data.message, 3, 'red');
     }
   };

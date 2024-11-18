@@ -21,7 +21,6 @@ const EditEmployee = ({openModalFun, reload, formInfos, id}) => {
 
   const onFinish = async () => {
     setLoading (true);
-    console.log (formValues);
     try {
       // const res = await axios.post (`${BACKENDURL}/employee/update?id=${id}`, formValues);
       // reload ();

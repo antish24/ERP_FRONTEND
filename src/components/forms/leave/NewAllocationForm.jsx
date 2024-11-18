@@ -11,7 +11,6 @@ const NewAllocationForm = ({openModalFun, reload}) => {
 
   const onFinish = async values => {
     setLoading (true);
-    console.log(values)
     try {
       const res = await axios.post (`${BACKENDURL}/leave/newallocation`, {
         count: values.count,

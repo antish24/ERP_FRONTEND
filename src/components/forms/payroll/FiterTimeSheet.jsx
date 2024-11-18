@@ -40,7 +40,7 @@ const FiterTimeSheet = ({reload,loading}) => {
   const siteOptions = siteData
     ? siteData.map (d => ({
         value: d.site,
-        label: d.site,
+        label:d.company+" "+d.city+" "+ d.subCity +" "+d.site+" ",
       }))
     : [];
 
@@ -92,7 +92,7 @@ const FiterTimeSheet = ({reload,loading}) => {
         />
       </Form.Item>
       <Form.Item
-        style={{margin: '5px', width: '200px'}}
+        style={{margin: '5px', width: '400px'}}
         name="type"
         rules={[
           {

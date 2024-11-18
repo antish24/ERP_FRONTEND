@@ -535,7 +535,6 @@ const App = () => {
   try {
     const res=await axios.get(`${BACKENDURL}/auth/user`,{headers})
     setAuthLoading(false)
-    console.log(res)
   } catch (error) {
     setAuthLoading(false)
     // navigate('/')

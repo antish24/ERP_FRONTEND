@@ -125,56 +125,6 @@ const PayrollTable = ({payrollData, loading, reload}) => {
     setSortedInfo ({});
   };
 
-  const cities = [
-    {
-      name: 'Addis Ababa',
-      subCities: [
-        {
-          name: 'Kirkos',
-          weredas: ['Wereda 1', 'Wereda 2'],
-        },
-        {
-          name: 'Lideta',
-          weredas: ['Wereda 3', 'Wereda 4'],
-        },
-        {
-          name: 'Bole',
-          weredas: ['Wereda 5', 'Wereda 6'],
-        },
-      ],
-    },
-    {
-      name: 'Gonder',
-      subCities: [
-        {
-          name: 'Aynalem',
-          weredas: ['Wereda 7', 'Wereda 8'],
-        },
-        {
-          name: 'Agena',
-          weredas: ['Wereda 9', 'Wereda 10'],
-        },
-        {
-          name: 'Gore',
-          weredas: ['Wereda 11', 'Wereda 12'],
-        },
-      ],
-    },
-    {
-      name: 'Sidama',
-      subCities: [
-        {
-          name: 'Hawassa',
-          weredas: ['Wereda 13', 'Wereda 14'],
-        },
-        {
-          name: 'Bensa',
-          weredas: ['Wereda 15', 'Wereda 16'],
-        },
-      ],
-    },
-  ];
-
   const preDefined = [
     {
       title: 'NO',
@@ -337,13 +287,15 @@ const PayrollTable = ({payrollData, loading, reload}) => {
           key: 'totalDeduction',
           width: '120px',
         },
-        {
-          title: 'Net Salary',
-          dataIndex: 'netSalary',
-          key: 'netSalary',
-          width: '120px',
-        },
       ],
+    },
+
+    {
+      title: 'Net Salary',
+      dataIndex: 'netSalary',
+      key: 'netSalary',
+      width: '120px',
+      fixed: 'right',
     },
 
     // {
@@ -392,40 +344,40 @@ const PayrollTable = ({payrollData, loading, reload}) => {
     // },
   ];
 
-  let dynamicColumns = [];
-  let dynamicColumns2 = [];
+  // let dynamicColumns = [];
+  // let dynamicColumns2 = [];
 
-  dynamicColumns.push ({
-    title: 'Earning',
-    children: [
-      {
-        title: 'test',
-        dataIndex: 'test',
-        width: '120px',
-      },
-      {
-        title: 'test',
-        dataIndex: 'test',
-        width: '120px',
-      },
-    ],
-  });
+  // dynamicColumns.push ({
+  //   title: 'Earning',
+  //   children: [
+  //     {
+  //       title: 'test',
+  //       dataIndex: 'test',
+  //       width: '120px',
+  //     },
+  //     {
+  //       title: 'test',
+  //       dataIndex: 'test',
+  //       width: '120px',
+  //     },
+  //   ],
+  // });
 
-  dynamicColumns2.push ({
-    title: 'Dductions',
-    children: [
-      {
-        title: 'test',
-        dataIndex: 'test',
-        width: '120px',
-      },
-      {
-        title: 'test',
-        dataIndex: 'test',
-        width: '120px',
-      },
-    ],
-  });
+  // dynamicColumns2.push ({
+  //   title: 'Dductions',
+  //   children: [
+  //     {
+  //       title: 'test',
+  //       dataIndex: 'test',
+  //       width: '120px',
+  //     },
+  //     {
+  //       title: 'test',
+  //       dataIndex: 'test',
+  //       width: '120px',
+  //     },
+  //   ],
+  // });
 
   const columns = [...preDefined];
   // const columns = [...preDefined, ...dynamicColumns ,...dynamicColumns2];
