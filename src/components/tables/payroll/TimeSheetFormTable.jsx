@@ -101,8 +101,14 @@ const TimeSheetFormTable = ({timesheetData, reload}) => {
 
   const columns = [
     {
-      title: 'IDNO',
+      title: 'NO',
+      key: 'NO',
       fixed: 'left',
+      render:(r,__,index)=><Link to={`/employee/detail/${r.IDNO}`}>{index+1}</Link>,
+      width: '40px',
+    },
+    {
+      title: 'IDNO',
       dataIndex: 'IDNO',
       ...getColumnSearchProps ('IDNO'),
       width: '130px',
@@ -119,27 +125,19 @@ const TimeSheetFormTable = ({timesheetData, reload}) => {
       title: 'Full Name',
       children: [
         {
-          title: 'First',
-          dataIndex: 'fName',
-          ...getColumnSearchProps ('fName'),
-          width: '90px',
-          key: 'fName',
+          title: 'Amharic',
+          dataIndex: 'fullName',
+          ...getColumnSearchProps ('fullName'),
+          width: '300px',
+          key: 'fullName',
         },
         {
-          title: 'Middle',
-          dataIndex: 'mName',
-          ...getColumnSearchProps ('mName'),
-          width: '90px',
-          key: 'mName',
+          title: 'English',
+          dataIndex: 'fullNameEnglish',
+          ...getColumnSearchProps ('fullNameEnglish'),
+          width: '300px',
+          key: 'fullNameEnglish',
         },
-        {
-          title: 'Last',
-          dataIndex: 'lName',
-          ...getColumnSearchProps ('lName'),
-          width: '90px',
-          key: 'lName',
-        },
-        ,
       ],
     },
     {
@@ -184,7 +182,7 @@ const TimeSheetFormTable = ({timesheetData, reload}) => {
     },
     {
       title: 'operation',
-      width: '120px',
+      width: '200px',
       render: r => (
         <Space
           style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap'}}
@@ -229,7 +227,7 @@ const TimeSheetFormTable = ({timesheetData, reload}) => {
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,
-          position: ['topRight'],
+          // position: ['topRight'],
         }}
       />
     </div>

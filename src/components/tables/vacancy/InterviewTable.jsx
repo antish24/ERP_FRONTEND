@@ -112,7 +112,7 @@ const InterviewTable = ({interviewData, loading, reload}) => {
       title: 'IDNO',
       dataIndex: 'IDNO',
       ...getColumnSearchProps ('IDNO'),
-      width: '80px',
+      width: '100px',
       key: 'IDNO',
     },
     {

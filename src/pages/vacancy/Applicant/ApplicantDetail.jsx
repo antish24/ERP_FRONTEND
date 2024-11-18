@@ -34,7 +34,7 @@ const ApplicantDetail = () => {
 
 
   const EmployeeInfoData = [
-    {key: '4', label: 'Full Name', children: applicantData.name},
+    {key: '4', label: 'Full Name', children: applicantData.fullName},
     {key: '5', label: 'Date of Birth', children:FormatDay(applicantData.dateOfBirth)},
     {key: '6', label: 'Gender', children: applicantData.sex},
     {key: '8', label: 'Nationality', children:applicantData.nationality},

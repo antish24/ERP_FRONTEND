@@ -7,7 +7,6 @@ import {
   Tag,
 } from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
-import {FormatDateTime} from '../../../helper/FormatDate';
 import {AlertContext} from '../../../context/AlertContext';
 import {Link} from 'react-router-dom';
 import { FormatDay } from '../../../helper/FormateDay';
@@ -105,27 +104,19 @@ const VacancyApplicantTable = ({vacancyApplicantData, loading, reload}) => {
       title: 'Full Name',
       children: [
         {
-          title: 'First',
-          dataIndex: 'fName',
-          ...getColumnSearchProps ('fName'),
-          width: '120px',
-          key: 'fName',
+          title: 'Amharic',
+          dataIndex: 'fullName',
+          ...getColumnSearchProps ('fullName'),
+          width: '300px',
+          key: 'fullName',
         },
         {
-          title: 'Middle',
-          dataIndex: 'mName',
-          ...getColumnSearchProps ('mName'),
-          width: '120px',
-          key: 'mName',
+          title: 'English',
+          dataIndex: 'fullNameEnglish',
+          ...getColumnSearchProps ('fullNameEnglish'),
+          width: '300px',
+          key: 'fullNameEnglish',
         },
-        {
-          title: 'Last',
-          dataIndex: 'lName',
-          ...getColumnSearchProps ('lName'),
-          width: '90px',
-          key: 'lName',
-        },
-        ,
       ],
     },
     {
@@ -153,7 +144,7 @@ const VacancyApplicantTable = ({vacancyApplicantData, loading, reload}) => {
       dataIndex: 'createdAt',
       width: '150px',
       key: 'createdAt',
-      render: r => <span>{FormatDateTime (r)}</span>,
+      render: r => <span>{FormatDay (r)}</span>,
     },
     {
       title: 'Score',

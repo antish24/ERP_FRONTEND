@@ -68,6 +68,7 @@ const NewAllocationForm = ({openModalFun, reload}) => {
           name="endMonth"
           rules={[
             {
+              required: true,
               message: 'Please input End',
             },
           ]}

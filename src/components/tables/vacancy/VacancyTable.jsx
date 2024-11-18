@@ -125,7 +125,7 @@ const VacancyTable = ({vacancyData, loading, reload}) => {
       title: 'IDNO',
       dataIndex: 'IDNO',
       ...getColumnSearchProps ('IDNO'),
-      width: '80px',
+      width: '120px',
       key: 'IDNO',
     },
     {

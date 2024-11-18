@@ -130,17 +130,11 @@ const NewEmployee = ({openModalFun, reload}) => {
       title: 'Personal Information',
       key: 1,
       children: [
-        {lable: 'Doc No', name: 'docNo', type: 'Input', width: '100%',notRequired: true},
-        {lable: 'Rank', name: 'rank', type: 'Input', width: '23%'},
-        {lable: 'First Name', name: 'fName', type: 'Input', width: '25%'},
-        {
-          lable: 'Middle Name',
-          name: 'mName',
-          type: 'Input',
-          width: '25%',
-        },
-        {lable: 'Last Name', name: 'lName', type: 'Input', width: '24%',notRequired: true,},
-        {lable: 'ID Number', name: 'IDNumber', type: 'Input', width: '100%'},
+        {lable: 'Doc No', name: 'docNo', type: 'Input', width: '40%',notRequired: true},
+        {lable: 'ID Number', name: 'IDNumber', type: 'Input', width: '29%'},
+        {lable: 'Rank', name: 'rank', type: 'Input', width: '30%'},
+        {lable: 'ሙሉ ስም', name: 'fullName', type: 'Input', width: '50%'},
+        {lable: 'Full Name', name: 'fullNameEnglish', type: 'Input', width: '49%'},
         {
           lable: 'Profile Photo',
           name: 'profilePhoto',
@@ -367,7 +361,7 @@ const NewEmployee = ({openModalFun, reload}) => {
           lable: 'FingerPrint Report',
           name: 'fingerPrintReport',
           type: 'File',
-          req: '.tml',
+          // req: '.tml',
           width: '100%',
         },
       ],
@@ -447,9 +441,10 @@ const NewEmployee = ({openModalFun, reload}) => {
                         : data.type === 'File' &&
                             <Dragger
                               name='file'
-                              action={data.name==='fingerPrintReport'?
-                                `${BACKENDURL}/upload/fingerprint`:`${BACKENDURL}/upload/new`
-                              }
+                              // action={data.name==='fingerPrintReport'?
+                              //   `${BACKENDURL}/upload/fingerprint`:`${BACKENDURL}/upload/new`
+                              // }
+                              action={`${BACKENDURL}/upload/new`}
                               accept={data.req}
                               onChange={e => {
                                 if(e.file.status==='done')onFieldChange (data.name, e.file.response.name.filename);

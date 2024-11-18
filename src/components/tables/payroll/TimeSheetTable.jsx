@@ -90,8 +90,14 @@ const TimeSheetTable = ({timesheetData, loading}) => {
 
   const columns = [
     {
-      title: 'Employee Information',
+      title: 'NO',
+      key: 'NO',
       fixed: 'left',
+      render:(r,__,index)=><Link to={`/employee/detail/${r.IDNO}`}>{index+1}</Link>,
+      width: '40px',
+    },
+    {
+      title: 'Employee Information',
       children: [
         {
           title: 'IDNO',
@@ -111,27 +117,19 @@ const TimeSheetTable = ({timesheetData, loading}) => {
           title: 'Full Name',
           children: [
             {
-              title: 'First',
-              dataIndex: 'fName',
-              ...getColumnSearchProps ('fName'),
-              width: '90px',
-              key: 'fName',
+              title: 'Amharic',
+              dataIndex: 'fullName',
+              ...getColumnSearchProps ('fullName'),
+              width: '300px',
+              key: 'fullName',
             },
             {
-              title: 'Middle',
-              dataIndex: 'mName',
-              ...getColumnSearchProps ('mName'),
-              width: '90px',
-              key: 'mName',
+              title: 'English',
+              dataIndex: 'fullNameEnglish',
+              ...getColumnSearchProps ('fullNameEnglish'),
+              width: '300px',
+              key: 'fullNameEnglish',
             },
-            {
-              title: 'Last',
-              dataIndex: 'lName',
-              ...getColumnSearchProps ('lName'),
-              width: '90px',
-              key: 'lName',
-            },
-            ,
           ],
         },
         // {

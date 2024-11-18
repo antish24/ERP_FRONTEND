@@ -39,7 +39,7 @@ const DisciplineDetail = () => {
 
       const disciplineInfoData = [
         {key: '1',label: 'Employee IDNO',children:<Link to={`/employee/detail/${disciplineDetail.IDNO}`}>{disciplineDetail.IDNO}</Link>},
-        {key: '2',label: 'Employee Full Name',children:<>{disciplineDetail.fName + ' '+disciplineDetail.mName+' '+(disciplineDetail.lName?disciplineDetail.lName:'')}</>},
+        {key: '2',label: 'Employee Full Name',children:<>{disciplineDetail.fullName}</>},
         {key: '3',label: 'incidentDate',children:<>{FormatDay(disciplineDetail.incidentDate)}</>},
         {key: '4',label: 'Description',children:<TextArea value={disciplineDetail.description}></TextArea>,span:3},
         {key: '5',label: 'Attachment',children:<Image/>,span:3},

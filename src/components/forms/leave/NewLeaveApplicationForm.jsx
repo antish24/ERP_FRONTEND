@@ -1,99 +1,93 @@
-import {Button, Form, Input, Select} from 'antd';
-import axios from 'axios';
-import React, {useContext, useEffect, useState} from 'react';
-import {AlertContext} from '../../../context/AlertContext';
-import {BACKENDURL} from '../../../helper/Urls';
-import TextArea from 'antd/es/input/TextArea';
-import Dragger from 'antd/es/upload/Dragger';
-import {FaUpload} from 'react-icons/fa';
+import { Button, Form, Input, Select } from "antd";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { AlertContext } from "../../../context/AlertContext";
+import { BACKENDURL } from "../../../helper/Urls";
+import TextArea from "antd/es/input/TextArea";
+import Dragger from "antd/es/upload/Dragger";
+import { FaUpload } from "react-icons/fa";
 
-const NewLeaveApplicationForm = ({openModalFun, reload}) => {
-  const {openNotification} = useContext (AlertContext);
-  const [loading, setLoading] = useState (false);
-  const [form] = Form.useForm ();
+const NewLeaveApplicationForm = ({ openModalFun, reload }) => {
+  const { openNotification } = useContext(AlertContext);
+  const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
 
-  const [employeeData, setemployeeData] = useState ([]);
-  const [employeeId, setemployeeId] = useState ('');
-  const [loadingEmployee, setloadingEmployee] = useState (false);
+  const [employeeData, setemployeeData] = useState([]);
+  const [employeeId, setemployeeId] = useState("");
+  const [loadingEmployee, setloadingEmployee] = useState(false);
 
   const getemployeeData = async () => {
-    setloadingEmployee (true);
+    setloadingEmployee(true);
     try {
-      const res = await axios.get (`${BACKENDURL}/employee/names`);
-      setloadingEmployee (false);
-      setemployeeData (res.data.employees);
+      const res = await axios.get(`${BACKENDURL}/employee/names`);
+      setloadingEmployee(false);
+      setemployeeData(res.data.employees);
     } catch (error) {
-      openNotification ('error', error.response.data.message, 3, 'red');
-      setloadingEmployee (false);
+      openNotification("error", error.response.data.message, 3, "red");
+      setloadingEmployee(false);
     }
   };
 
   const employeeOptions = employeeData.length
-    ? employeeData.map (emp => ({
+    ? employeeData.map((emp) => ({
         value: emp.empId,
-        label: emp.IDNO +
-          '-' +
-          emp.fName +
-          ' ' +
-          emp.mName +
-          ' ' +
-          (emp.lName ? emp.lName : ''),
+        label: emp.IDNO + "-" + emp.fullName,
       }))
     : [];
 
-  useEffect (() => {
-    getemployeeData ();
+  useEffect(() => {
+    getemployeeData();
   }, []);
 
-  const [leaveTypeData, setleaveTypeData] = useState ([]);
-  const [loadingLeaveType, setLoadingLeaveType] = useState (false);
+  const [leaveTypeData, setleaveTypeData] = useState([]);
+  const [loadingLeaveType, setLoadingLeaveType] = useState(false);
 
   const getleaveTypeData = async () => {
-    setLoadingLeaveType (true);
+    setLoadingLeaveType(true);
     try {
-      const res = await axios.get (`${BACKENDURL}/leave/alltype`);
-      setLoadingLeaveType (false);
-      setleaveTypeData (res.data.leaveTypes);
+      const res = await axios.get(`${BACKENDURL}/leave/alltype`);
+      setLoadingLeaveType(false);
+      setleaveTypeData(res.data.leaveTypes);
     } catch (error) {
-      openNotification ('error', error.response.data.message, 3, 'red');
-      setLoadingLeaveType (false);
+      openNotification("error", error.response.data.message, 3, "red");
+      setLoadingLeaveType(false);
     }
   };
 
   const leaveTypeOptions = leaveTypeData.length
-    ? leaveTypeData.map (d => ({
+    ? leaveTypeData.map((d) => ({
         value: d.id,
         label: d.name,
       }))
     : [];
 
-  useEffect (() => {
-    getleaveTypeData ();
+  useEffect(() => {
+    getleaveTypeData();
   }, []);
 
-  const onFinish = async values => {
-    setLoading (true);
+  const onFinish = async (values) => {
+    setLoading(true);
     try {
-      const res = await axios.post (`${BACKENDURL}/leave/application/new`, {
+      const res = await axios.post(`${BACKENDURL}/leave/application/new`, {
         employee: values.employee,
         leaveType: values.leaveType,
         reason: values.reason,
         attachment: values.attachments.name,
-        startDate: values.startDate + 'T00:00:00Z',
-        endDate: values.endDate + 'T00:00:00Z',
+        startDate: values.startDate + "T00:00:00Z",
+        endDate: values.endDate + "T00:00:00Z",
       });
-      reload ();
-      setLoading (false);
-      openModalFun (false);
-      openNotification ('success', res.data.message, 3, 'green');
-      form.resetFields ();
+      reload();
+      setLoading(false);
+      openModalFun(false);
+      openNotification("success", res.data.message, 3, "green");
+      form.resetFields();
     } catch (error) {
-      setLoading (false);
-      openNotification ('error', error.response.data.message, 3, 'red');
+      setLoading(false);
+      openNotification("error", error.response.data.message, 3, "red");
     }
   };
-  const onFinishFailed = errorInfo => {
-    console.log ('Failed:', errorInfo);
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -103,42 +97,40 @@ const NewLeaveApplicationForm = ({openModalFun, reload}) => {
       form={form}
       onFinishFailed={onFinishFailed}
     >
-
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
         }}
       >
-
         <Form.Item
-          style={{margin: '5px', width: '100%'}}
+          style={{ margin: "5px", width: "100%" }}
           label="Employee"
           name="employee"
           rules={[
             {
               required: true,
-              message: 'Please input Employee',
+              message: "Please input Employee",
             },
           ]}
         >
           <Select
             placeholder="Search to Select"
-            onChange={e => setemployeeId (e)}
+            onChange={(e) => setemployeeId(e)}
             options={employeeOptions}
             loading={loadingEmployee}
             disabled={loadingEmployee}
           />
         </Form.Item>
         <Form.Item
-          style={{margin: '5px', width: '100%'}}
+          style={{ margin: "5px", width: "100%" }}
           label="Leave Type"
           name="leaveType"
           rules={[
             {
               required: true,
-              message: 'Please input Leave Type',
+              message: "Please input Leave Type",
             },
           ]}
         >
@@ -151,13 +143,13 @@ const NewLeaveApplicationForm = ({openModalFun, reload}) => {
         </Form.Item>
 
         <Form.Item
-          style={{margin: '5px', width: '47%'}}
+          style={{ margin: "5px", width: "47%" }}
           label="Start Date"
           name="startDate"
           rules={[
             {
               required: true,
-              message: 'Please input Start',
+              message: "Please input Start",
             },
           ]}
         >
@@ -165,13 +157,13 @@ const NewLeaveApplicationForm = ({openModalFun, reload}) => {
         </Form.Item>
 
         <Form.Item
-          style={{margin: '5px', width: '47%'}}
+          style={{ margin: "5px", width: "47%" }}
           label="End Date"
           name="endDate"
           rules={[
             {
               required: true,
-              message: 'Please input End',
+              message: "Please input End",
             },
           ]}
         >
@@ -179,12 +171,12 @@ const NewLeaveApplicationForm = ({openModalFun, reload}) => {
         </Form.Item>
 
         <Form.Item
-          style={{margin: '5px', width: '100%'}}
+          style={{ margin: "5px", width: "100%" }}
           label="Reason"
           rules={[
             {
               required: true,
-              message: 'Please input reason',
+              message: "Please input reason",
             },
           ]}
           name="reason"
@@ -194,7 +186,7 @@ const NewLeaveApplicationForm = ({openModalFun, reload}) => {
         <Form.Item
           name="attachments"
           label="Attachments"
-          style={{margin: '5px', width: '100%'}}
+          style={{ margin: "5px", width: "100%" }}
         >
           <Dragger
             multiple={false}
@@ -206,15 +198,13 @@ const NewLeaveApplicationForm = ({openModalFun, reload}) => {
             </p>
 
             <p className="ant-upload-hint">
-              Support for a single
-              {' '}
-              file. Max size 3MB.
+              Support for a single file. Max size 3MB.
             </p>
           </Dragger>
         </Form.Item>
       </div>
       <Form.Item
-        style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}
+        style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}
       >
         <Button
           type="primary"

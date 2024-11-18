@@ -47,14 +47,8 @@ const NewApplicantForm = ({vacancyId,openModalFun, reload}) => {
       title: 'Personal Information',
       key: 1,
       children: [
-        {lable: 'First Name', name: 'fName', type: 'Input', width: '30%'},
-        {
-          lable: 'Middle Name',
-          name: 'mName',
-          type: 'Input',
-          width: '30%',
-        },
-        {lable: 'Last Name', name: 'lName', type: 'Input', width: '30%',notRequired: true,},
+        {lable: 'ሙሉ ስም', name: 'fullName', type: 'Input', width: '100%'},
+        {lable: 'Full Name', name: 'fullNameEnglish', type: 'Input', width: '100%'},
         {
           lable: 'Date Of Birth',
           name: 'dateOfBirth',

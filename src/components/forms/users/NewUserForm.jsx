@@ -28,7 +28,7 @@ const NewUserForm = ({openModalFun, reload}) => {
   const employeeOptions = employeeData.length
   ? employeeData.map(emp => ({
     value: emp.id,
-    label: emp.IDNO +"-"+emp.fName+" "+emp.mName+" "+(emp.lName?emp.lName:"") 
+    label: emp.IDNO +"-"+emp.fullName
   }))
   : [];
 

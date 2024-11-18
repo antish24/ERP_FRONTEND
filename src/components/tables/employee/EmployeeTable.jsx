@@ -124,35 +124,22 @@ const EmployeeTable = ({userData, loading, reload}) => {
           render: r => <Tag color='success'>{r}</Tag>,
         },
         {
-          title: 'Full  2',
-          width: '400px',
-          render:r=><div><div>{r.fullName}</div><div>{r.fullNameEnglish}</div></div>
-        },
-        {
           title: 'Full Name',
           children: [
             {
-              title: 'First',
-              dataIndex: 'fName',
-              ...getColumnSearchProps ('fName'),
-              width: '120px',
-              key: 'fName',
+              title: 'Amharic',
+              dataIndex: 'fullName',
+              ...getColumnSearchProps ('fullName'),
+              width: '300px',
+              key: 'fullName',
             },
             {
-              title: 'Middle',
-              dataIndex: 'mName',
-              ...getColumnSearchProps ('mName'),
-              width: '120px',
-              key: 'mName',
+              title: 'English',
+              dataIndex: 'fullNameEnglish',
+              ...getColumnSearchProps ('fullNameEnglish'),
+              width: '300px',
+              key: 'fullNameEnglish',
             },
-            {
-              title: 'Last',
-              dataIndex: 'lName',
-              ...getColumnSearchProps ('lName'),
-              width: '120px',
-              key: 'lName',
-            },
-            ,
           ],
         },
         {

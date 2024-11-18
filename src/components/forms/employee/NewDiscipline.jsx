@@ -29,6 +29,7 @@ const NewDiscipline = ({openModalFun, reload}) => {
 
   const [employeeData, setEmployeeData] = useState ([]);
   const [loadingEmployee, setLoadingEmployee] = useState (false);
+  const [agreementFile, setAgreementFile] = useState ('');
 
   const getBranchData = async () => {
     setLoadingBranch (true);
@@ -72,7 +73,7 @@ const NewDiscipline = ({openModalFun, reload}) => {
   const EmployeeOptions = employeeData
     ? employeeData.map (branch => ({
         value: branch.id,
-        label: branch.IDNO + ' ' + branch.fName + ' ' + branch.mName,
+        label: branch.IDNO + ' ' + branch.fullName,
       }))
     : [];
 
@@ -160,7 +161,7 @@ const NewDiscipline = ({openModalFun, reload}) => {
   const WitnessesOptions = witnessesData
     ? witnessesData.map (emp => ({
         value: emp.id,
-        label: emp.IDNO + ' ' + emp.fName + ' ' + emp.mName,
+        label: emp.IDNO + ' ' + emp.fullName,
       }))
     : [];
 
@@ -170,7 +171,7 @@ const NewDiscipline = ({openModalFun, reload}) => {
       const res = await axios.post (`${BACKENDURL}/employee/discipline/new`, {
         incidentDate: values.incidentDate,
         description: values.description,
-        attachment: values.attachment.file.name,
+        attachment: agreementFile,
         witnesses: values.witnesses,
         employeeWork: values.employee,
       });
@@ -314,6 +315,10 @@ const NewDiscipline = ({openModalFun, reload}) => {
           <Dragger
             action={`${BACKENDURL}/upload/new`}
             multiple={false}
+            onChange={e => {
+              if (e.file.status === 'done')
+                setAgreementFile (e.file.response.name.filename);
+            }}
             maxCount={1}
           >
             <p className="ant-upload-drag-icon">

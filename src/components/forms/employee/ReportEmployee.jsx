@@ -18,9 +18,8 @@ const ReportEmployee = ({data,openModalFun, reload}) => {
   const [form] = Form.useForm ();
   const [formValues, setFormValues] = useState ({
     ['idNumber']: '1',
-    ['firstName']: "fname",
-    ['middleName']: "mname",
-    ['lastName']: "lname",
+    ['fullName']: "fullName",
+    ['fullNameEnglish']: "fullNameEnglish",
     ['employeePhoto']: 'employeePhoto',
     ['gender']: 'Male',
     ['dateOfBirth']: "2002-21-11",
@@ -70,8 +69,14 @@ const ReportEmployee = ({data,openModalFun, reload}) => {
           type: 'Select',
           multiple:true,
           options: [
-            {value: 'Tefth', lable: '1'},
-            {value: 'Security', lable: '2'},
+            { value: 'theft', label: 'Theft' },
+            { value: 'vandalism', label: 'Vandalism' },
+            { value: 'trespassing', label: 'Trespassing' },
+            { value: 'accident', label: 'Accident' },
+            { value: 'fire', label: 'Fire Incident' },
+            { value: 'medical', label: 'Medical Emergency' },
+            { value: 'equipment_failure', label: 'Equipment Failure' },
+            { value: 'security_breach', label: 'Security Breach' },
           ],
           width: '31%',
         },
@@ -80,8 +85,9 @@ const ReportEmployee = ({data,openModalFun, reload}) => {
           name: 'incidentMagnitude',
           type: 'Select',
           options: [
-            {value: 'Tefth', lable: '1'},
-            {value: 'Security', lable: '2'},
+            {value: 'High', lable: '1'},
+            {value: 'Mid', lable: '2'},
+            {value: 'Low', lable: '2'},
           ],
           width: '31%',
         },
@@ -90,7 +96,6 @@ const ReportEmployee = ({data,openModalFun, reload}) => {
           lable: 'Note',
           name: 'note',
           type: 'Input',
-          req: 'number',
           width: '100%',
         },
         {

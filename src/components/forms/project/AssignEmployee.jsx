@@ -66,7 +66,7 @@ const AssignEmployee = ({openModalFun, reload, projectId}) => {
   const EmployeeOptions = employeeData
     ? employeeData.map (branch => ({
         value: branch.id,
-        label: branch.IDNO + ' ' + branch.fName + ' ' + branch.mName,
+        label: branch.IDNO + ' ' + branch.fullName,
       }))
     : [];
 

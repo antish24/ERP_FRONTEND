@@ -299,7 +299,7 @@ const HireEmployee = ({data,openModalFun, reload}) => {
           lable: 'FingerPrint Report',
           name: 'fingerPrintReport',
           type: 'File',
-          req: '.tml',
+          req: 'application/pdf',
           width: '100%',
         },
       ],
@@ -378,9 +378,7 @@ const HireEmployee = ({data,openModalFun, reload}) => {
                         : data.type === 'File' &&
                             <Dragger
                               name='file'
-                              action={data.name==='fingerPrintReport'?
-                                `${BACKENDURL}/upload/fingerprint`:`${BACKENDURL}/upload/new`
-                              }
+                              action={`${BACKENDURL}/upload/new`}
                               accept={data.req}
                               onChange={e => {
                                 if(e.file.status==='done')onFieldChange (data.name, e.file.response.name.filename);

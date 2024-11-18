@@ -94,7 +94,7 @@ const EditCompanyInfo = ({openModalFun, reload, formInfos, id}) => {
                             accept={data.req}
                             onChange={e => {
                               if (e.file.status === 'done')
-                                onFieldChange (data.name, e.file.name);
+                                onFieldChange (data.name, e.file.response.name.filename);
                             }}
                             multiple={false}
                             maxCount={1}
