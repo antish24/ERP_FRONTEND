@@ -13,6 +13,7 @@ const NewDocForm = ({openModalFun, reload}) => {
 
   const [typesData, settypesData] = useState ([]);
   const [loadingType, setLoadingType] = useState (false);
+  const [attachmentFile, setAttachmentFile] = useState ('');
 
   const gettypesData = async () => {
     setLoadingType (true);
@@ -45,7 +46,7 @@ const NewDocForm = ({openModalFun, reload}) => {
         type: values.type,
         author: values.author,
         docRef:values.docRef,
-        attachment: values.attachment.file.name,
+        attachment: attachmentFile,
       });
       reload ();
       setLoading (false);
@@ -148,6 +149,10 @@ const NewDocForm = ({openModalFun, reload}) => {
           <Dragger
             action={`${BACKENDURL}/upload/new`}
             multiple={false}
+            onChange={e => {
+              if (e.file.status === 'done')
+                setAttachmentFile (e.file.response.name.filename);
+            }}
             maxCount={1}
           >
             <div className="ant-upload-drag-icon">

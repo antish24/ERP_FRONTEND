@@ -250,10 +250,10 @@ const AssetStorePage = () => {
                   openModalFun={(e) => setModalOpen(e)}
                 />
               );
-              setModalTitle("New Asset Form");
+              setModalTitle("Buy Asset Form");
             }}
           >
-            Add New Asset
+            Buy New Asset
           </Button>
           <Button type="default" onClick={() => getAssetData()} loading={loadingAsset}>
             Reload

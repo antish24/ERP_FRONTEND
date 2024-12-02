@@ -211,7 +211,7 @@ const AssetUnitPage = ({}) => {
               setModalTitle("New Asset Unit Form");
             }}
           >
-            Add Asset Unit
+            Add Asset Measurment Unit
           </Button>
           <Button type="default" onClick={() =>getUnitData()} loading={loadingUnit}>
             Reload

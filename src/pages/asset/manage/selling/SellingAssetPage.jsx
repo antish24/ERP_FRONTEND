@@ -4,24 +4,25 @@ import {
   Button,
   DatePicker,
   Input,
+  Popconfirm,
   Space,
   Table,
   Tag,
   Tooltip,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { FaFileCsv } from "react-icons/fa6";
+import { FaCircleCheck, FaFileCsv } from "react-icons/fa6";
 import { MdFilterAltOff } from "react-icons/md";
 import { CSVLink } from "react-csv";
-import { FormatDay } from "../../../helper/FormateDay";
 import { Link } from "react-router-dom";
-import NewAssetBatch from "../../../components/forms/asset/Inventory/NewAssetBatch";
-import ModalForm from "../../../modal/Modal";
-import { AlertContext } from "../../../context/AlertContext";
+import ModalForm from "../../../../modal/Modal";
 import axios from "axios";
-import { BACKENDURL } from "../../../helper/Urls";
+import { BACKENDURL } from "../../../../helper/Urls";
+import { AlertContext } from "../../../../context/AlertContext";
+import { FormatDateTime } from "../../../../helper/FormatDate";
+import SellAsset from "../../../../components/forms/asset/manage/SellAsset";
 
-const AssetBatchPage = () => {
+const SellingAssetPage = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const [searchText, setSearchText] = useState("");
   const searchInput = useRef(null);
@@ -107,123 +108,46 @@ const AssetBatchPage = () => {
 
   const columns = [
     {
-      title: "BatchIDNO",
-      dataIndex: "IDNO",
-      ...getColumnSearchProps("IDNO"),
+      title: "RefNo",
+      dataIndex: "RefNo",
+      ...getColumnSearchProps("RefNo"),
       width: "160px",
       fixed: "left",
-      key: "IDNO",
+      key: "RefNo",
     },
     {
-      title: "Asset Info",
+      title: "Transaction Info",
       children: [
         {
-          title: "Name",
-          dataIndex: "assetItem",
-          width: "120px",
-          render: (r) => <Tooltip title={() => r.name}>{r.IDNO}</Tooltip>,
+          title: "Count",
+          dataIndex: "items",
+          width: "100px",
+          key: "items",
+          render:r=>r.length
         },
         {
-          title: "Category",
-          dataIndex: "assetItem",
+          title: "Status",
+          dataIndex: "status",
           width: "100px",
-          key: "category",
-          render: (r) => <Tooltip title={() => r.category.name}>{r.category.IDNO}</Tooltip>,
+          render: (r) => <Tag color="success">{r}</Tag>,
+          key: "status",
+        },
+
+        {
+          title: "Created At",
+          dataIndex: "createdAt",
+          width: "100px",
+          key: "createdAt",
+          render: (r) => FormatDateTime(r),
         },
         {
-          title: "Type",
-          dataIndex: "assetItem",
+          title: "Updated At",
+          dataIndex: "updatedAt",
           width: "100px",
-          key: "type",
-          render: (r) => <Tooltip title={() => r.type.description}>{r.type.name}</Tooltip>,
-        },
-        {
-          title: "Unit",
-          dataIndex: "assetItem",
-          width: "100px",
-          key: "unit",
-          render: (r) => <Tooltip title={() => r.unit.description}>{r.unit.name}</Tooltip>,
+          render: (r) => FormatDateTime(r),
+          key: "updatedAt",
         },
       ],
-    },
-    {
-      title: "Quantity",
-      dataIndex: "quantity",
-      width: "100px",
-      key: "quantity",
-    },
-    {
-      title: "Stock Level",
-      dataIndex: "stockLevel",
-      width: "100px",
-      key: "stockLevel",
-    },
-    {
-      title: "Cost Per Unit",
-      dataIndex: "costPerUnit",
-      width: "100px",
-      key: "costPerUnit",
-    },
-    {
-      title: "Total Cost",
-      dataIndex: "totalCost",
-      width: "100px",
-      key: "totalCost",
-    },
-    {
-      title: "Expiration Date",
-      dataIndex: "expirationDate",
-      width: "200px",
-      render: (r) => FormatDay(r),
-      key: "expirationDate",
-    },
-    {
-      title: "Storage Location",
-      dataIndex: "storageLocation",
-      width: "200px",
-      key: "storageLocation",
-    },
-    {
-      title: "Supplier",
-      dataIndex: "supplier",
-      width: "100px",
-      key: "supplier",
-    },
-    {
-      title: "Registed",
-      dataIndex: "createdAt",
-      width: "100px",
-      key: "createdAt",
-      render: (r) => FormatDay(r),
-    },
-    {
-      title: "Updated At",
-      dataIndex: "updatedAt",
-      width: "100px",
-      render: (r) => FormatDay(r),
-      key: "updatedAt",
-    },
-    {
-      fixed: "right",
-      title: "Status",
-      width: "80px",
-      key: "status",
-      filters: [
-        {
-          text: "Active",
-          value: "Active",
-        },
-        {
-          text: "InActive",
-          value: "InActive",
-        },
-      ],
-      render: (r) => (
-        <Badge
-          status={r.status === "InStock" ? "success" : "warning"}
-          text={r.status}
-        />
-      ),
     },
     {
       title: "Action",
@@ -231,9 +155,19 @@ const AssetBatchPage = () => {
       fixed: "right",
       key: "operation",
       render: (r) => (
-        <Tooltip title="View Detail">
-          <Link to={`/asset/store/batch/${r.IDNO}`}>Detail</Link>
-        </Tooltip>
+        <>
+          <Tooltip title="View Detail">
+            <Link to={`/asset/transaction/detail/${r.RefNo}`}>Detail</Link>
+          </Tooltip>
+          <Popconfirm
+            title="Are you sure to approve Transaction"
+            onConfirm={() => alert("done")}
+          >
+            <Tooltip title="Approve Payroll">
+              <FaCircleCheck color="green" cursor="pointer" />
+            </Tooltip>
+          </Popconfirm>
+        </>
       ),
     },
   ];
@@ -242,23 +176,23 @@ const AssetBatchPage = () => {
   const [modalContent, setModalContent] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
 
-  const [assetData, setassetData] = useState([]);
-  const [loadingAsset, setLoadingAsset] = useState(false);
+  const [TransactionData, setTransactionData] = useState([]);
+  const [loadingTransactionData, setLoadingTransactionData] = useState(false);
 
-  const getAssetData = async () => {
-    setLoadingAsset(true);
+  const getTransactionData = async () => {
+    setLoadingTransactionData(true);
     try {
-      const res = await axios.get(`${BACKENDURL}/inventory/batch/all`);
-      setLoadingAsset(false);
-      setassetData(res.data.batchs);
+      const res = await axios.get(`${BACKENDURL}/inventory/tx/all`);
+      setLoadingTransactionData(false);
+      setTransactionData(res.data.tx);
     } catch (error) {
       openNotification("error", error.response.data, 3, "red");
-      setLoadingAsset(false);
+      setLoadingTransactionData(false);
     }
   };
 
   useEffect(() => {
-    getAssetData();
+    getTransactionData();
   }, []);
 
   return (
@@ -278,17 +212,17 @@ const AssetBatchPage = () => {
             onClick={() => {
               setModalOpen(true);
               setModalContent(
-                <NewAssetBatch
-                  reload={() => getAssetData()}
+                <SellAsset
+                  reload={() =>getTransactionData()}
                   openModalFun={(e) => setModalOpen(e)}
                 />
               );
-              setModalTitle("Buy Asset Batch Form");
+              setModalTitle("Sell Asset Form");
             }}
           >
-            Buy New Batch
+            Sell Asset
           </Button>
-          <Button type="default" onClick={() => getAssetData()} loading={loadingAsset}>
+          <Button type="default" onClick={() => getTransactionData()} loading={loadingTransactionData}>
             Reload
           </Button>
           <ModalForm
@@ -298,7 +232,8 @@ const AssetBatchPage = () => {
             content={modalContent}
           />
         </div>
-        <CSVLink data={[]} filename={"employee-detail-csv"}>
+
+        <CSVLink data={[]} filename={"transaction-detail-csv"}>
           <Button>
             <FaFileCsv />
             CSV
@@ -319,11 +254,11 @@ const AssetBatchPage = () => {
           defaultPageSize: 10,
           showSizeChanger: true,
         }}
-        dataSource={assetData}
+        dataSource={TransactionData}
         onChange={() => {}}
-        loading={loadingAsset}
+        loading={loadingTransactionData}
       />
     </div>
   );
 };
-export default AssetBatchPage;
+export default SellingAssetPage;

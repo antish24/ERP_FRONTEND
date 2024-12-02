@@ -105,7 +105,7 @@ const LeaveBalanceTable = ({leaveData, loading}) => {
       title: 'IDNO',
       dataIndex: 'IDNO',
       ...getColumnSearchProps ('IDNO'),
-      width: '100px',
+      width: '140px',
       fixed:'left',
       render:r=><Link to={`/employee/detail/${r}`}>{r}</Link>,
       key: 'IDNO',

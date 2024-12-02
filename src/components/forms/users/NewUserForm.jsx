@@ -123,10 +123,6 @@ const NewUserForm = ({openModalFun, reload}) => {
             optionFilterProp="children"
             options={[
               {
-                value: 'Full',
-                label: 'Full System Access',
-              },
-              {
                 value: 'Employee',
                 label: 'Employee',
               },
@@ -166,13 +162,17 @@ const NewUserForm = ({openModalFun, reload}) => {
                 value: 'Doc',
                 label: 'Doc',
               },
+              {
+                value: 'User',
+                label: 'User',
+              },
             ]}
           />
         </Form.Item>
 
         <Form.Item
           style={{margin: '5px 0', width: '49%'}}
-          label="Access"
+          label="Data Access"
           rules={[
             {
               required: true,
@@ -183,6 +183,8 @@ const NewUserForm = ({openModalFun, reload}) => {
         >
           <Select
             showSearch
+            mode='multiple'
+            maxTagCount='responsive'
             placeholder="Search to Select"
             optionFilterProp="children"
             filterOption={(input, option) => (option?.label ?? '').includes(input)}
@@ -195,8 +197,20 @@ const NewUserForm = ({openModalFun, reload}) => {
                 label: 'Read',
               },
               {
-                value: 'Write',
-                label: 'Write',
+                value: 'Create',
+                label: 'Create',
+              },
+              {
+                value: 'Update',
+                label: 'Update',
+              },
+              {
+                value: 'Delete',
+                label: 'Delete',
+              },
+              {
+                value: 'File',
+                label: 'File',
               },
             ]}
           />
@@ -214,6 +228,12 @@ const NewUserForm = ({openModalFun, reload}) => {
           style={{margin: '5px 0', width: '100%'}}
           label="Link to Employee"
           name="employee"
+          rules={[
+            {
+              required: true,
+              message: 'Please input employee',
+            },
+          ]}
         >
           <Select
             placeholder="Search to Select"
@@ -221,6 +241,13 @@ const NewUserForm = ({openModalFun, reload}) => {
             options={employeeOptions}
             loading={loadingEmployee}
             disabled={loadingEmployee}
+
+            showSearch
+            optionFilterProp="children"
+            filterOption={(input, option) => (option?.label ?? '').includes(input)}
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+            }
           />
         </Form.Item>
       </div>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Link, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import {Layout,theme,Breadcrumb,Button, Menu, Tooltip, Dropdown, Badge, Tabs,} from 'antd';
 
-import {FaAngleLeft, FaAngleRight,FaBuildingUser,FaClipboardList,FaCoins,FaDiagramProject,FaFileInvoice,FaFileSignature, FaUser, FaUserCheck, FaUserMinus, FaUsers, FaUserShield, FaWpforms} from 'react-icons/fa6';
+import {FaAngleRight,FaBuildingUser,FaClipboardList,FaCoins,FaDiagramProject,FaFileInvoice,FaFileSignature, FaUser, FaUserCheck, FaUserMinus, FaUsers, FaUserShield, FaWpforms} from 'react-icons/fa6';
 import { MdAccountBalance, MdTimer,MdAirlines, MdAnalytics,  MdDashboard, MdLocationCity, MdOutlineDateRange, MdOutlineSupportAgent, MdOutlineWork, MdOutlineWorkHistory, MdWork, MdReport,  MdDocumentScanner, MdMessage, MdNextPlan, MdAddShoppingCart,  MdRemoveShoppingCart, MdManageHistory, MdStore } from 'react-icons/md';
 import { PiOfficeChair } from 'react-icons/pi';
 
@@ -67,13 +67,13 @@ import { GiAutoRepair, GiMoneyStack, GiTakeMyMoney } from 'react-icons/gi';
 import { LuPanelLeftClose, LuPanelRightClose } from 'react-icons/lu';
 import { IoMdArrowBack } from 'react-icons/io';
 import Search from 'antd/es/input/Search';
-import { FaSearch } from 'react-icons/fa';
 import LayoutSearchForm from './helper/LayoutSearchForm';
 import AssetAnalytics from './pages/asset/AssetAnalytics';
 import AssetStore from './pages/asset/inventory/AssetStore';
 import AssetTransaction from './pages/asset/inventory/transaction/AssetTransaction';
 import AssetTransactionDetail from './pages/asset/inventory/transaction/AssetTransactionDetail';
 import AssetBatchDetailPage from './pages/asset/inventory/AssetBatchDetailPage';
+import SellingAssetPage from './pages/asset/manage/selling/SellingAssetPage';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -249,10 +249,6 @@ const App = () => {
               key: '712',
               label: <Link to={'/asset/transaction'}><FaClipboardList/> Transaction</Link>,
             },
-            {
-              key: '713',
-              label: <Link to={'/asset/maintenance'}><GiAutoRepair/> Maintenance</Link>,
-            },
           ]
         },
         {
@@ -260,12 +256,12 @@ const App = () => {
           label: <span><MdManageHistory/> Manage</span>,
           children: [
             {
-              key: '721',
-              label: <Link to={'/asset/buying'}><MdAddShoppingCart/> Buying</Link>,
-            },
-            {
               key: '722',
               label: <Link to={'/asset/selling'}><MdRemoveShoppingCart/> Selling</Link>,
+            },
+            {
+              key: '723',
+              label: <Link to={'/asset/maintenance'}><GiAutoRepair/> Maintenance</Link>,
             },
           ]
         },
@@ -375,7 +371,7 @@ const App = () => {
     },
     {
       key: 'System',
-      label: 'System',
+      label: <div style={{width:'100%',background:'rgba(255,255,255,.3)',height:'3px'}}></div>,
       type: 'group',
     },
     {
@@ -395,7 +391,7 @@ const App = () => {
     },
     {
       key: '15',
-      label: 'Version 0.2',
+      label: 'Version 0.3',
       icon: <MdNextPlan size={20} />,
     },
   ];
@@ -537,7 +533,7 @@ const App = () => {
     setAuthLoading(false)
   } catch (error) {
     setAuthLoading(false)
-    // navigate('/')
+    navigate('/')
   }
   }
 
@@ -720,8 +716,7 @@ const App = () => {
             <Route element={<AssetTransaction />} path="/asset/transaction" />
             <Route element={<AssetTransactionDetail />} path="/asset/transaction/detail/:id" />
             <Route element={<LeaveBalancePage />} path="/asset/maintenance" />
-            <Route element={<LeaveBalancePage />} path="/asset/buying" />
-            <Route element={<LeaveBalancePage />} path="/asset/selling" />
+            <Route element={<SellingAssetPage />} path="/asset/selling" />
             <Route element={<AssetAnalytics />} path="/asset/analytics" />
 
             <Route element={<Users />} path="/users/list" />

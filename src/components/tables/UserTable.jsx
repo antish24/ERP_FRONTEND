@@ -164,13 +164,13 @@ const UserTable = ({userData,loading,reload}) => {
           },
         ],
       },
-      {
-        title: 'Access',
-        dataIndex: 'access',
-        width:'80px',
-        key: 'access',
-        render:r=>(<Tag color={r==='Full'?"green":r==="RW"?'gold':'processing'}>{r}</Tag>)
-      },
+      // {
+      //   title: 'Access',
+      //   dataIndex: 'access',
+      //   width:'80px',
+      //   key: 'access',
+      //   render:r=>(<Tag color={r==='Full'?"green":r==="RW"?'gold':'processing'}>{r}</Tag>)
+      // },
     {
       title: 'Date',
       dataIndex: 'createdAt',

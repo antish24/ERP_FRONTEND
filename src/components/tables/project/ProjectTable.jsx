@@ -126,13 +126,13 @@ const ProjectTable = ({ loading, datas, setProjectData }) => {
       key: 'noSecurity',
     },
     {
-      title: 'From',
+      title: 'Start Date',
       dataIndex: 'startDate',
       key: 'startDate',
       render:r=>FormatDay(r)
     },
     {
-      title: 'To',
+      title: 'End Date',
       dataIndex: 'endDate',
       key: 'endDate',
       render:r=>FormatDay(r)

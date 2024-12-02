@@ -76,7 +76,7 @@ const FiterTimeSheet = ({reload,loading}) => {
       </Form.Item>
       <Form.Item
         name="site"
-        style={{margin: '5px', width: '200px'}}
+        style={{margin: '5px', width: '400px'}}
         rules={[
           {
             required: true,
@@ -92,7 +92,7 @@ const FiterTimeSheet = ({reload,loading}) => {
         />
       </Form.Item>
       <Form.Item
-        style={{margin: '5px', width: '400px'}}
+        style={{margin: '5px', width: '150px'}}
         name="type"
         rules={[
           {
